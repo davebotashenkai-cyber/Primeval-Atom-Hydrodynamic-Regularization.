@@ -1,0 +1,13 @@
+######################################################################
+## INVARIANT MATRIX BENCHMARK CARD: Z' ZEPTO & AXION VACUUM FIELDS  ##
+## REGISTERED UNDER UNIQUE DIGITAL ID: DOI:10.5281/zenodo.22035357  ##
+######################################################################
+BLOCK MASS # Extensiones del Modelo Estándar e Invariantes de la Matriz de Masa
+      32 1.400000e+04 # M_Zprime (Bosón Vectorial Pesado Zepto en GeV)
+ 9000001 6.541830e-06 # M_Axion  (Regularizador basal del vacío en eV)
+#
+BLOCK DECAY # Cálculos Relativistas de la Anchura del Espacio de Fases
+      32 2.770500e+00 # W_Zprime (Anchura de Desintegración Total en GeV)
+#
+BLOCK QEDCOUPLING # Campos de Gauge Electrodébiles Invariantes de Escala
+      1  7.812500e-03 # Alpha_em (Alpha en ejecución a la escala MZ, 1/128)
