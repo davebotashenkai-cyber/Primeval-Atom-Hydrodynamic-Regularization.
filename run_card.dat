@@ -1,0 +1,66 @@
+################################################################################
+##  run_card.dat — MadGraph5_aMC@NLO
+##  Process: pp > zprime > l+ l-  (Drell-Yan Z'_Zepto production)
+##  Model:   zprime UFO (or SM + zprime extension)
+##  Author:  David Botargues Martin — DOI:10.5281/zenodo.22035357
+##  Notes:   sigma_hat at partonic threshold sqrt(s_hat) = M_Zprime = 14 TeV
+##           Hadronic run at sqrt(s) = 14 TeV (HL-LHC design energy)
+################################################################################
+
+ 10000 = nevents        ! Number of events to generate
+ 12345 = iseed          ! Random number seed
+
+# Collider setup
+ 6500.0 = ebeam1        ! Beam 1 energy (GeV) — 6500 GeV * 2 = 13 TeV
+ 6500.0 = ebeam2        ! Beam 2 energy (GeV)
+ 1  = lpp1              ! Beam 1: proton (1=p, -1=pbar)
+ 1  = lpp2              ! Beam 2: proton
+
+# For HL-LHC at 14 TeV, change both to 7000.0:
+# 7000.0 = ebeam1
+# 7000.0 = ebeam2
+
+# PDF set
+ 315200 = pdlabel       ! lhapdf set number: NNPDF31_nnlo_as_0118 (LHAPDF6 id)
+ -1     = lhaid         ! Use pdlabel if -1
+
+# Renormalization and factorization scales
+ 0 = fixed_ren_scale    ! 0 = dynamical scale (sqrt(s_hat)/2), 1 = fixed
+ 0 = fixed_fac_scale    ! 0 = dynamical
+ 1.0 = scalefact        ! Scale multiplier (mu = scalefact * sqrt(s_hat)/2)
+
+# Phase space cuts (minimal — Z' is narrow, set wide window)
+ 0.0   = mmjj           ! Min dijet invariant mass (GeV) — 0 = no cut
+ 0.0   = ptj            ! Min jet pT (GeV)
+ 0.0   = ptl            ! Min lepton pT (GeV) — set 0 for inclusive
+ -1.0  = etaj           ! Max jet |eta| — -1 = no cut
+ -1.0  = etal           ! Max lepton |eta|
+
+# Resonance window: focus on Z' pole ± 5 Gamma
+ 13986.15 = mll_lower   ! M_Z' - 5*Gamma = 14000 - 5*2.7705 GeV
+ 14013.85 = mll_upper   ! M_Z' + 5*Gamma = 14000 + 5*2.7705 GeV
+
+# Output
+ 1 = ickkw              ! 0 = fixed order, 1 = MLM matching (use 0 for LO resonance)
+ 0 = ickkw              ! LO fixed order for clean resonance study
+
+# Decay: Z' -> l+ l- (set in proc_card or via MadSpin)
+# Recommended proc_card.dat content:
+#   import model sm
+#   define p = p b b~
+#   define l+ = e+ mu+
+#   define l- = e- mu-
+#   generate p p > zprime > l+ l-
+#   output zprime_production
+
+################################################################################
+##  PHYSICS NOTE (from param_card.dat DOI:10.5281/zenodo.22035357):
+##
+##  M_Zprime = 14000.0 GeV  (14 TeV)
+##  W_Zprime =     2.7705 GeV  (total decay width, Gamma/M ~ 1.98e-4, narrow)
+##  sigma_partonic_peak = 82.19 pb  (Breit-Wigner pole, pre-PDF convolution)
+##
+##  At LHC 13 TeV: kinematically inaccessible (x1*x2=1 at threshold, PDF->0)
+##  At HL-LHC 14 TeV: accessible via PDF tail — expect hadronic sigma << 82 pb
+##  At FCC-hh 100 TeV: tau = (14/100)^2 = 0.02, PDF finite -> pb-level production
+################################################################################
